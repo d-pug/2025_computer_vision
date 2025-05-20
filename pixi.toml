@@ -6,13 +6,28 @@ authors = ["Nick Ulle <naulle@ucdavis.edu>"]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 
-[tasks]
+[environments]
+dev = ["dev"]
+
+[dependencies]
+python = ">=3.13.3,<3.14"
+pillow = ">=11.2.1,<12"
+numpy = ">=2.2.6,<3"
+scikit-image = ">=0.25.2,<0.26"
+jupyter = ">=1.1.1,<2"
+matplotlib = ">=3.10.3,<4"
+transformers = ">=4.51.3,<5"
+pytorch-cpu = ">=2.7.0,<3"
+
+[feature.dev.dependencies]
+python = ">=3.13.3,<3.14"
+jupyter-book = ">=1.0.4.post1,<2"
+ghp-import = ">=2.1.0,<3"
+
+[feature.dev.tasks]
+jl = { cmd = "jupyter lab", description = "Run Jupyter Lab." }
 build = { cmd = "jupyter-book build .", description = "Build the reader." }
 publish = { cmd = "ghp-import --no-jekyll --no-history --push _build/html", description = "Publish the reader to the `gh-pages` branch on GitHub." }
 clean = { cmd = "rm -rf _build/", description = "Remove the build directory." }
 rebuild = { depends-on = ["clean", "build"], description = "Remove the build directory and build the reader." }
 
-[dependencies]
-python = ">=3.13.3,<3.14"
-jupyter-book = ">=1.0.4.post1,<2"
-ghp-import = ">=2.1.0,<3"
