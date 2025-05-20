@@ -1,8 +1,8 @@
 [project]
-name = "workshop_???"
+name = "2025_computer_vision"
 version = "2025.spring.0"  # <year>.<quarter>.<revision #>
-description = "Reader for the ???."
-authors = ["??? <???@ucdavis.edu>"]
+description = "Notes for the 2025 Intro to Computer Vision demo."
+authors = ["Nick Ulle <naulle@ucdavis.edu>"]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 
