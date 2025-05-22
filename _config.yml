@@ -24,7 +24,7 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/ucdavisdatalab/2025_computer_vision
+  url: https://github.com/d-pug/2025_computer_vision
   path_to_book: docs
 
 # Add GitHub buttons to your book
