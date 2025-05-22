@@ -1,0 +1,1038 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Notes &#8212; Introduction to Computer Vision</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=dddfd265"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/index';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en-us"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Introduction to Computer Vision</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Notes
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/d-pug/2025_computer_vision" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/d-pug/2025_computer_vision/issues/new?title=Issue%20on%20page%20%2Fchapters/index.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/index.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Notes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-image-data">Getting Started with Image Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-images-with-scikit-image">Processing Images with scikit-image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images-in-memory">Images in Memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-models">Machine Learning Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-models">Deep Learning Models</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="notes">
+<h1>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h1>
+<p>These are notes for Introduction to Computer Vision, a demo for the <a class="reference external" href="https://datalab.ucdavis.edu/davis-python-users-group/">Davis
+Python Users Group</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><a class="reference external" href="https://ucdavis.box.com/s/4chzepm36nnxba11jvjsk6of8m3w2e8c">Click here</a> to access the shared data directory if you want to follow
+along with the live demo.</p>
+</div>
+<section id="getting-started-with-image-data">
+<span id="sec-getting-started"></span><h2>Getting Started with Image Data<a class="headerlink" href="#getting-started-with-image-data" title="Link to this heading">#</a></h2>
+<p>Computers represent data with numbers, and there are many different ways to
+represent an image with numbers. One common way is to divide an image into a
+grid of tiny single-color squares, called <strong>pixels</strong>, and represent the color
+of each pixel as a tuple of numbers. Images represented this way are called
+<strong>raster graphics</strong>.</p>
+<style type="text/css">
+    .black, .blue, .gold, .white {
+        display: inline-block;
+        vertical-align: sub;
+        width: 1em;
+        height: 1em;
+        border: 1px solid;
+    }
+    .black { background-color: #000000 }
+    .blue  { background-color: #0000ff }
+    .gold  { background-color: #ffdd00 }
+    .white { background-color: #ffffff }
+</style>
+<p>A <strong>color model</strong> is a system for representing colors as tuples of numbers.
+Each element of the tuple is called a <strong>channel</strong>. The range of colors a color
+model can represent is called the <strong>gamut</strong> (GAM-it) of the model.</p>
+<p>For example, the <strong>red-green-blue (RGB) color model</strong> represents colors as
+mixtures of the primary colors of light: red, green, and blue. The <a class="reference external" href="https://en.wikipedia.org/wiki/RGB_color_model">RGB
+model</a> corresponds to way most projectors, televisions, and computer
+monitors actually work. For each channel/primary color (red, green, and blue),
+<span class="math notranslate nohighlight">\(0.0\)</span> intensity means the light is off, and <span class="math notranslate nohighlight">\(1.0\)</span> means the light is as bright
+as possible. Some examples:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((0, 0, 0)\)</span> is black <span class="black"></span></p></li>
+<li><p><span class="math notranslate nohighlight">\((0, 0, 1)\)</span> is pure blue <span class="blue"></span></p></li>
+<li><p><span class="math notranslate nohighlight">\((1.0, 0.87, 0.0)\)</span> is a warm yellow <span class="gold"></span></p></li>
+<li><p><span class="math notranslate nohighlight">\((1, 1, 1)\)</span> is white <span class="white"></span></p></li>
+</ul>
+<p>A few other common color models are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/HSL_and_HSV">Hue-saturation-value (HSV)</a> and hue-saturation-lightness (HSL) models
+reparameterize the RGB model in terms of perceived hue, saturation
+(colorfulness), and lightness or value (emitted light). The HSV and HSL
+models are convenient processing related to how colors are perceived, such as
+identifying “red” pixels in an image.</p></li>
+<li><p>Cyan-magenta-yellow (CMY) model, which represents colors as mixtures of the
+primary colors of ink. The related <a class="reference external" href="https://en.wikipedia.org/wiki/CMYK_color_model">cyan-magenta-yellow-key (CMYK)
+model</a> is widely used in printing and represents black, or <em>key</em>,
+separately, to produce more accurate blacks and minimize ink use.</p></li>
+<li><p>Grayscale, which only allows shades of gray (including black and white).
+Grayscale only has 1 channel.</p></li>
+</ul>
+<p>Channels are sometimes encoded as bytes: numbers from 0 to 255, inclusive. For
+the RGB model, <code class="docutils literal notranslate"><span class="pre">0</span></code> means <span class="math notranslate nohighlight">\(0.0\)</span> and <code class="docutils literal notranslate"><span class="pre">255</span></code> means <span class="math notranslate nohighlight">\(1.0\)</span>. In this encoding:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code> is black <span class="black"></span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">255)</span></code> is pure blue <span class="blue"></span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">221,</span> <span class="pre">0)</span></code> is a warm yellow <span class="gold"></span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(255,</span> <span class="pre">255,</span> <span class="pre">255)</span></code> is white <span class="white"></span></p></li>
+</ul>
+</section>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section lists a few general-purpose packages for image processing and
+computer vision. For some kinds of image data, such as geospatial images and
+medical images, there are specialized packages that are more appropriate and
+convenient for common use-cases.</p>
+</div>
+<p>My preferred packages are ⭐’d.</p>
+<p>Numerical computing (tensor/linear algebra) frameworks:</p>
+<ul class="simple">
+<li><p>⭐<a class="reference external" href="https://numpy.org/">NumPy</a>: Python’s most popular numerical computing package. Supported by
+a wide variety of other packages. Fast and stable. Limited to CPUs.</p>
+<ul>
+<li><p><a class="reference external" href="https://docs.jax.dev/">JAX</a>: Extends NumPy to run on other hardware (e.g., GPUs) and support
+deep learning (by adding automatic differentiation). The <a class="reference external" href="https://dm-pix.readthedocs.io/">PIX</a> package
+provides specific support for computer vision.</p></li>
+</ul>
+</li>
+<li><p>⭐<a class="reference external" href="https://pytorch.org/">PyTorch</a>: Python’s most popular deep learning package. Provides specific
+support for computer vision through the Torchvision subpackage.</p></li>
+<li><p><a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a>: Another deep learning package.</p></li>
+</ul>
+<p>Image processing packages:</p>
+<ul class="simple">
+<li><p>⭐<a class="reference external" href="https://scikit-image.org/">scikit-image</a>: The programming interface is more Pythonic than OpenCV,
+but the package doesn’t have as many features and isn’t as fast. Will feel
+familiar if you’ve used <a class="reference external" href="https://scikit-learn.org/">scikit-learn</a>. Images are just NumPy arrays. A
+good starting point for most projects unless you know you’ll need OpenCV or a
+deep learning package.</p></li>
+<li><p>⭐<a class="reference external" href="https://opencv.org/">OpenCV</a> (opencv-python): Developed as C++ library, but has official
+Python bindings. Lots of features, but the programming interface and
+documentation are sometimes a little arcane.</p></li>
+<li><p>⭐<a class="reference external" href="https://scipy.org/">SciPy</a>: A good supplement to scikit-image. Images are just NumPy arrays.
+Notably includes fast Fourier transform functions. Slower than OpenCV.</p></li>
+<li><p>⭐<a class="reference external" href="https://python-pillow.github.io/">Pillow</a>: A mature, general-purpose image processing package. Based on
+the older, unmaintained Python Imaging Library (PIL). Not designed
+specifically for computer vision, but many deep learning packages expect the
+Pillow images as input.</p>
+<ul>
+<li><p><a class="reference external" href="https://imageio.readthedocs.io/">Imageio</a>: A readers/writers for over 295 image formats.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://itk.org/">ITK</a>: Originally focused on medical applications, but now broadening to a
+general-purpose package.</p>
+<ul>
+<li><p><a class="reference external" href="https://simpleitk.org/">SimpleITK</a>: Simplifies the ITK programming interface.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://docs.wand-py.org/">Wand</a>: Bindings to the ImageMagick library.</p></li>
+</ul>
+<p>Other relevant packages:</p>
+<ul class="simple">
+<li><p>⭐<a class="reference external" href="https://matplotlib.org/">Matplotlib</a>: For visualizing images. Many image processing packages
+provide visualization functions, but Matplotlib is more flexible.</p></li>
+<li><p><a class="reference external" href="https://huggingface.co/docs/transformers/">Transformers</a>: Access deep learning models on <a class="reference external" href="https://huggingface.co/">Hugging Face</a> (a
+popular model hosting site) for computer vision and more. Requires PyTorch,
+TensorFlow, or JAX to run models (depending on the model).</p></li>
+</ul>
+<p>If you want to use an off-the-shelf machine learning (not deep learning) model
+on image data, use an image processing library to transform the images into
+features for your model. Then use <a class="reference external" href="https://scikit-learn.org/">scikit-learn</a> to fit and assess the model.</p>
+<p>There are many different pretrained deep learning (neural network) models
+available for classification, object detection, segmentation, and other tasks.
+Cutting-edge models tend to be distributed as standalone packages (and might
+eventually make their way into <a class="reference external" href="https://huggingface.co/docs/transformers/">Transformers</a> or <a class="reference external" href="https://scikit-learn.org/">scikit-learn</a>). Deep
+learning models are typically implemented in <a class="reference external" href="https://pytorch.org/">PyTorch</a>, <a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a>, or
+<a class="reference external" href="https://docs.jax.dev/">JAX</a>, so it’s helpful to be familiar with those packages.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Training your own deep learning model from scratch usually isn’t feasible
+unless you have lots of training data and compute resources. Instead, it’s
+common to take a pretrained model and <strong>fine-tune</strong> it by training the last few
+layers of the model (the classifier) on custom data.</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>It can be difficult to install PyTorch (with Torchvision) and OpenCV in the
+same environment, because their dependencies are often incompatible.</p>
+</div>
+</section>
+<section id="processing-images-with-scikit-image">
+<h2>Processing Images with scikit-image<a class="headerlink" href="#processing-images-with-scikit-image" title="Link to this heading">#</a></h2>
+<p>Let’s use scikit-image to read and transform an image. We’ll use Matplotlib to
+display the image. The module name for scikit-image is <code class="docutils literal notranslate"><span class="pre">skimage</span></code>, and it’s
+conventionally imported as <code class="docutils literal notranslate"><span class="pre">ski</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ski</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ski.io.imread</span></code> function can read an image, and Matplotlib’s <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code>
+function can display one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flower</span> <span class="o">=</span> <span class="n">ski</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/flower.jpg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">flower</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7c239db00440&gt;
+</pre></div>
+</div>
+<img alt="../_images/bc8517a7aa061ff2e0a271f506284dc5d5cc0eb643a6d79d733cba1f0f75ca4d.png" src="../_images/bc8517a7aa061ff2e0a271f506284dc5d5cc0eb643a6d79d733cba1f0f75ca4d.png" />
+</div>
+</div>
+<p>The image is just a NumPy array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">flower</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.ndarray
+</pre></div>
+</div>
+</div>
+</div>
+<p>It has 3 dimensions: height, width, and channels. In this case they are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flower</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1063, 800, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>A slice along the 3rd dimension gives the values for a single channel. The
+scikit-image package reads most images as RGB by default, so here’s the red
+channel:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flower</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[147, 150, 161, ...,  47,  47,  51],
+       [149, 148, 154, ...,  48,  50,  50],
+       [156, 151, 153, ...,  46,  52,  48],
+       ...,
+       [137, 125, 108, ..., 117, 127, 127],
+       [131, 126, 113, ..., 121, 121, 117],
+       [107, 112, 110, ..., 103, 114, 118]],
+      shape=(1063, 800), dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The package provides a variety of filters, transformations, and other
+operations; see <a class="reference external" href="https://scikit-image.org/docs/stable/">the documentation</a> for details.</p>
+<p>For example, you can rotate an image with the <code class="docutils literal notranslate"><span class="pre">ski.transform.rotate</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rotated</span> <span class="o">=</span> <span class="n">ski</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">flower</span><span class="p">,</span> <span class="mi">35</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rotated</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7c23974660d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/71bd7ffae02e397f3793b268fcfea0e4025932c2809401c54670313e21a7c3af.png" src="../_images/71bd7ffae02e397f3793b268fcfea0e4025932c2809401c54670313e21a7c3af.png" />
+</div>
+</div>
+<p>There are also functions for more complicated algorithms, such as edge
+detection. For instance, the <code class="docutils literal notranslate"><span class="pre">ski.feature.canny</span></code> function runs the Canny edge
+detection algorithm. The algorithm requires a grayscale image, so first we
+convert the image with <code class="docutils literal notranslate"><span class="pre">ski.color.rgb2gray</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gray_flower</span> <span class="o">=</span> <span class="n">ski</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">flower</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">ski</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">canny</span><span class="p">(</span><span class="n">gray_flower</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7c23974d3c50&gt;
+</pre></div>
+</div>
+<img alt="../_images/87893f7bb78ef05db5512a05c054ce0a31b997f5981f75acf27336d765693877.png" src="../_images/87893f7bb78ef05db5512a05c054ce0a31b997f5981f75acf27336d765693877.png" />
+</div>
+</div>
+<p>Different color models are useful for different tasks. Suppose we want to
+select or recolor the flowers in the image. The flowers have a distinct yellow
+color, so we can use an HSV model and select the pixels by hue. To get started,
+we’ll set up a helper function to plot HSV images (Matplotlib assumes RGB or
+grayscale) and convert the flower image to HSV:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">imshow_hsv</span><span class="p">(</span><span class="n">hsv</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ski</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">hsv2rgb</span><span class="p">(</span><span class="n">hsv</span><span class="p">))</span>
+
+<span class="n">hsv_flower</span> <span class="o">=</span> <span class="n">ski</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb2hsv</span><span class="p">(</span><span class="n">flower</span><span class="p">)</span>
+<span class="n">imshow_hsv</span><span class="p">(</span><span class="n">hsv_flower</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/acbf08b9a7c2908ec0208cddefc268e712c4c3045926c4921b1e21c7fcb1165b.png" src="../_images/acbf08b9a7c2908ec0208cddefc268e712c4c3045926c4921b1e21c7fcb1165b.png" />
+</div>
+</div>
+<p>The scikit-image HSV format uses floating point numbers from <span class="math notranslate nohighlight">\(0.0\)</span> to <span class="math notranslate nohighlight">\(1.0\)</span>
+rather than bytes. Yellow is around 0.15 (you can use <a class="reference external" href="https://www.selecolor.com/en/hsv-color-picker/">an online color
+picker</a> to figure this out; many color pickers treat hue in HSV
+as an angle between 0 and 360).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hue</span> <span class="o">=</span> <span class="n">hsv_flower</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">is_yellow</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">&lt;</span> <span class="n">hue</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">hue</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a matrix of Boolean values with the same dimensions as the image;
+this is called a <strong>mask</strong>. You can visualize a mask with <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> (purple
+means <code class="docutils literal notranslate"><span class="pre">False</span></code>, yellow means <code class="docutils literal notranslate"><span class="pre">True</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">is_yellow</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7c2397345a90&gt;
+</pre></div>
+</div>
+<img alt="../_images/069a1209db70c9f9262786eb3f2ea2a5714ad38d98393ff43d39201933cd7508.png" src="../_images/069a1209db70c9f9262786eb3f2ea2a5714ad38d98393ff43d39201933cd7508.png" />
+</div>
+</div>
+<p>The mask looks pretty good. Let’s try shifting hue of all of the pixels under
+the mask so that they’re pale blue. Pale blue is around 0.5, so we’ll add about
+0.35 to the hue of pixels under the mask:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recolor</span> <span class="o">=</span> <span class="n">hsv_flower</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">recolor</span><span class="p">[</span><span class="n">is_yellow</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.35</span>
+<span class="n">imshow_hsv</span><span class="p">(</span><span class="n">recolor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a4466302daa3b43a18bda268a63ff22b409c467a37a21f94e1f6d7eff0cda8b6.png" src="../_images/a4466302daa3b43a18bda268a63ff22b409c467a37a21f94e1f6d7eff0cda8b6.png" />
+</div>
+</div>
+<p>Some parts of the flowers don’t get selected because they have low saturation
+(colorfulness) and are actually closer to a green hue (0.3). We can add this
+case to the mask:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sat</span> <span class="o">=</span> <span class="n">hsv_flower</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">is_yellow</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">((</span><span class="mf">0.1</span> <span class="o">&lt;</span> <span class="n">hue</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">hue</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">))</span> <span class="o">|</span>
+    <span class="p">((</span><span class="mf">0.2</span> <span class="o">&lt;</span> <span class="n">hue</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">hue</span> <span class="o">&lt;</span> <span class="mf">0.4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">sat</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">recolor</span> <span class="o">=</span> <span class="n">hsv_flower</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">recolor</span><span class="p">[</span><span class="n">is_yellow</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.35</span>
+<span class="n">imshow_hsv</span><span class="p">(</span><span class="n">recolor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d2619c846bd1e0c79615584ac5d3d8c5e9f75cd262e5783985245e26193a252c.png" src="../_images/d2619c846bd1e0c79615584ac5d3d8c5e9f75cd262e5783985245e26193a252c.png" />
+</div>
+</div>
+<p>Filtering on HSV is simple and computationally cheap, so it is often a good
+starting point for selecting parts of images. Edge detection algorithms like
+the one we saw earlier are also useful for this purpose.</p>
+</section>
+<section id="images-in-memory">
+<h2>Images in Memory<a class="headerlink" href="#images-in-memory" title="Link to this heading">#</a></h2>
+<p>There are many different ways to represent images in memory.
+<a class="reference internal" href="#sec-getting-started"><span class="std std-ref">Getting Started with Image Data</span></a> described several color models, but color models are
+not the only thing that can differ in practice.</p>
+<p>The most common representation for images is RGB with dimensions <code class="docutils literal notranslate"><span class="pre">(height,</span> <span class="pre">width,</span> <span class="pre">channels)</span></code>. The RGB values may be encoded as bytes (0 to 255; reflects
+how images are often stored in files) or floating-point numbers (0.0 to 1.0;
+convenient for transforming images with less loss of precision). This is the
+default representation for scikit-image, SciPy, Pillow, and Matplotlib.</p>
+<p>Some packages with notably different defaults:</p>
+<ul class="simple">
+<li><p>OpenCV represents images as blue-green-red (BGR) with dimensions <code class="docutils literal notranslate"><span class="pre">(height,</span> <span class="pre">width,</span> <span class="pre">channels)</span></code>.</p></li>
+<li><p>PyTorch and TensorFlow represent images as RGB with dimensions <code class="docutils literal notranslate"><span class="pre">(channels,</span> <span class="pre">height,</span> <span class="pre">width)</span></code>.</p></li>
+</ul>
+<p>Most packages provide functions to convert between common representations.</p>
+</section>
+<section id="machine-learning-models">
+<h2>Machine Learning Models<a class="headerlink" href="#machine-learning-models" title="Link to this heading">#</a></h2>
+<p>If you want to train a machine learning model on images, the main thing you
+need to think about is how you’ll represent the images as <strong>features</strong> (input
+variables) for the model. Most models require a fixed-length vector of numbers
+as input. While it is possible to use the raw pixel values (for example, in
+RGB) as input, doing so means:</p>
+<ul class="simple">
+<li><p>All of your images must be the same size, because all of the feature vectors
+must be the same size.</p></li>
+<li><p>Throwing away spatial information about the image, because the 3-dimensional
+image array must be unraveled into a 1-dimensional feature vector.</p></li>
+<li><p>Providing the model with very large feature vectors (which can cause poor
+performance for most models) or using low resolution images.</p></li>
+</ul>
+<p>As a result, it’s usually better to engineer features from images rather than
+using the raw pixel values. There are many different ways to engineer features,
+and the best features usually depend on deep understanding of the problem you
+want the model to solve. Some examples include representations in different
+bases (such as a Fourier Transform, Wavelets, or Principal Components), edge
+masks (or other masks), and <a class="reference external" href="https://en.wikipedia.org/wiki/Scale-invariant_feature_transform">scale-invariant feature transformation</a>
+(SIFT).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A major reason for the success of neural networks and other deep learning
+models is that they engineer features automatically as part of their training
+process.</p>
+</div>
+<p>Once you have suitable features for an ML model, you can use any machine
+learning package. The premier machine learning package for Python is
+<a class="reference external" href="https://scikit-learn.org/">scikit-learn</a>.</p>
+<p>For finding appropriate features and an appropriate model, it can be helpful to
+think about how you plan to use the model:</p>
+<ul class="simple">
+<li><p>Classification: the model predicts whether each image is in a particular
+category</p></li>
+<li><p>Object detection: the model predicts a category and bounding box for (a
+subset of) objects within the image</p></li>
+<li><p>Segmentation: the model predicts a category for every pixel in the image,
+typically in order to partition the different parts of the image</p></li>
+</ul>
+</section>
+<section id="deep-learning-models">
+<h2>Deep Learning Models<a class="headerlink" href="#deep-learning-models" title="Link to this heading">#</a></h2>
+<p>An easy way to get started with deep learning models is to use the
+<a class="reference external" href="https://huggingface.co/docs/transformers/">Transformers</a> package, which can download and run models from <a class="reference external" href="https://huggingface.co/">Hugging
+Face</a>. The package documentation includes tutorials for many different
+kinds of models.</p>
+<p>Let’s use try Transformers for object detection and segmentation. The
+<code class="docutils literal notranslate"><span class="pre">pipeline</span></code> function is helpful for quickly trying a model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll start with object detection, using a pretrained model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">detector</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+    <span class="s2">&quot;object-detection&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;facebook/detr-resnet-50&quot;</span><span class="p">,</span> <span class="n">revision</span><span class="o">=</span><span class="s2">&quot;no_timm&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You&#39;ll still be able to use a slow processor with `use_fast=False`.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Device set to use cpu
+</pre></div>
+</div>
+</div>
+</div>
+<p>Transformers requires Pillow (imported as <code class="docutils literal notranslate"><span class="pre">PIL</span></code>) images as input, so let’s read
+the cat image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;data/cat.jpg&quot;</span><span class="p">)</span>
+<span class="n">cat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5fef2c1464ec44e1ec5bfec09ef376e10e7ce3d0fb7166169d5b87b803d4f573.png" src="../_images/5fef2c1464ec44e1ec5bfec09ef376e10e7ce3d0fb7166169d5b87b803d4f573.png" />
+</div>
+</div>
+<p>Now try running the detector:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">detector</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;score&#39;: 0.9990426898002625,
+  &#39;label&#39;: &#39;cat&#39;,
+  &#39;box&#39;: {&#39;xmin&#39;: 381, &#39;ymin&#39;: 507, &#39;xmax&#39;: 471, &#39;ymax&#39;: 665}}]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The detector found the cat! Object detection models can only detect the objects
+on which they were trained; this model happens to have been trained on cats
+(among other things). Fine-tuning pretrained models to detect a different set
+of objects than those they were originally trained on usually works well (and
+requires less training data and compute time).</p>
+<p>Let’s try segmenting the image (with a different model) instead:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">segmenter</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;image-segmentation&quot;</span><span class="p">,</span> <span class="s2">&quot;openmmlab/upernet-convnext-tiny&quot;</span><span class="p">)</span>
+
+<span class="n">segments</span> <span class="o">=</span> <span class="n">segmenter</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+<span class="n">segments</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Device set to use cpu
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;score&#39;: None,
+  &#39;label&#39;: &#39;wall&#39;,
+  &#39;mask&#39;: &lt;PIL.Image.Image image mode=L size=800x1063&gt;},
+ {&#39;score&#39;: None,
+  &#39;label&#39;: &#39;building&#39;,
+  &#39;mask&#39;: &lt;PIL.Image.Image image mode=L size=800x1063&gt;},
+ {&#39;score&#39;: None,
+  &#39;label&#39;: &#39;person&#39;,
+  &#39;mask&#39;: &lt;PIL.Image.Image image mode=L size=800x1063&gt;},
+ {&#39;score&#39;: None,
+  &#39;label&#39;: &#39;plant&#39;,
+  &#39;mask&#39;: &lt;PIL.Image.Image image mode=L size=800x1063&gt;},
+ {&#39;score&#39;: None,
+  &#39;label&#39;: &#39;fence&#39;,
+  &#39;mask&#39;: &lt;PIL.Image.Image image mode=L size=800x1063&gt;},
+ {&#39;score&#39;: None,
+  &#39;label&#39;: &#39;sculpture&#39;,
+  &#39;mask&#39;: &lt;PIL.Image.Image image mode=L size=800x1063&gt;}]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can display the segments on the image with a custom plotting function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">show_mask</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">random_color</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">random_color</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.6</span><span class="p">])],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">144</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">])</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">mask_image</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">color</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask_image</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">:</span>
+    <span class="n">show_mask</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;mask&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">random_color</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/22d1bea7971c6a2787321cb4d9f5deaf14a0395ea73f840fb8701e34e020b94a.png" src="../_images/22d1bea7971c6a2787321cb4d9f5deaf14a0395ea73f840fb8701e34e020b94a.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-image-data">Getting Started with Image Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-images-with-scikit-image">Processing Images with scikit-image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#images-in-memory">Images in Memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-models">Machine Learning Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-models">Deep Learning Models</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nick Ulle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
+  <img alt="CC BY-SA 4.0" src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg"> 
+</a>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
